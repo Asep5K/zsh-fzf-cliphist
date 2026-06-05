@@ -11,9 +11,9 @@ function fzf-cliphist-widget() {
         return 1
     }
 
-    local selected="$(cliphist list | fzf)"
+    local selected="$(cliphist list | fzf -d '\t' --with-nth=2)"
     if [[ -n "$selected" ]]; then
-        local decoded_text="$(printf "%s\n" "$selected" | cliphist decode)"
+        local decoded_text="$(printf "%s" "$selected" | cliphist decode)"
         LBUFFER+="$decoded_text"
     fi
     zle reset-prompt
